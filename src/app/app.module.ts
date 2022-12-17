@@ -1,42 +1,47 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatListModule } from "@angular/material/list";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatIconModule } from "@angular/material/icon";
-import { MatCardModule } from "@angular/material/card";
-import { MatTableModule } from "@angular/material/table";
-import { MatPaginatorModule } from "@angular/material/paginator";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInputModule } from "@angular/material/input";
-import { MatButtonModule } from "@angular/material/button";
-import { MatSelectModule } from "@angular/material/select";
-import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { AppRoutingModule } from './app-routing.module';
+
+import { AppComponent } from './app.component';
+import { SideMainNavComponent } from './layouts/side-main-nav/side-main-nav.component';
+import { MenuListItemComponent } from './layouts/side-main-nav/ui/menu-list-item/menu-list-item.component';
+
+// Animation
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// Layout module
+import { LayoutModule } from '@angular/cdk/layout';
+
+// Material modules
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    SideMainNavComponent,
+    MenuListItemComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSidenavModule,
-    MatListModule,
     MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatButtonModule,
-    MatSelectModule,
-    MatAutocompleteModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatMenuModule,
+    MatDialogModule,
+    LayoutModule,
+    BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
