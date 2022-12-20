@@ -1,20 +1,22 @@
 import { Input, Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import {
   AuthenticationService,
   TokenPayload,
 } from "src/app/services/authentication/authentication.service";
 
 @Component({
-  selector: "app-signin",
-  templateUrl: "./signin.component.html",
-  styleUrls: ["./signin.component.scss"],
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.scss"],
 })
-export class SigninComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    email: new FormControl(""),
-    password: new FormControl(""),
+    name: new FormControl("", Validators.required),
+    email: new FormControl("", Validators.required),
+    password: new FormControl("", Validators.required),
+    role: new FormControl("", Validators.required),
   });
 
   credentials: TokenPayload = {
@@ -32,7 +34,7 @@ export class SigninComponent implements OnInit {
     if (this.form.valid) {
       console.log(this.form.value);
       this.credentials = this.form.value;
-      this.auth.login(this.credentials).subscribe(
+      this.auth.register(this.credentials).subscribe(
         (resp) => {
           console.log(resp);
           this.router.navigate(["/admin"]);
