@@ -39,8 +39,8 @@ export class SideMainNavComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.auth.profile().subscribe((resp) => {
-      console.log(resp);
       this.details = resp;
+      sessionStorage.setItem("storeId", resp.storeId);
     });
   }
 

@@ -17,12 +17,14 @@ passport.use(
         // Return if user not found in database
         if (!user) {
           return done(null, false, {
+            messagecode: 401,
             message: "User not found",
           });
         }
         // Return if password is wrong
         if (!user.validPassword(password)) {
           return done(null, false, {
+            messagecode: 401,
             message: "Password is wrong",
           });
         }

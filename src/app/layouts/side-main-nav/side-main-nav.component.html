@@ -8,7 +8,9 @@
   >
     <mat-icon>menu</mat-icon>
   </button>
-  <span [ngClass]="{ hidden: opened ? false : true }">SideNav</span>
+  <span [ngClass]="{ hidden: opened ? false : true }"
+    >Pharma Inventory System</span
+  >
   <span> </span>
   <span class="head-menu"></span>
   <div class="row">
@@ -27,8 +29,8 @@
       <div style="text-align: center">
         <img class="avatar mat-elevation-z8" src="assets/images/profile.jpg" />
 
-        <h4 class="name text-responsive">{{ details.name }}</h4>
-        <p class="designation">{{ details.role | titlecase }}</p>
+        <h4 class="name text-responsive">{{ details?.name }}</h4>
+        <p class="designation">{{ details?.role | titlecase }}</p>
 
         <mat-divider></mat-divider>
       </div>
@@ -39,7 +41,7 @@
       ></app-menu-list-item>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="p-2">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

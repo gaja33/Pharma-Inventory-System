@@ -3,23 +3,28 @@ const Schema = mongoose.Schema;
 var crypto = require("crypto");
 var jwt = require("jsonwebtoken");
 
-let userSchema = new Schema({
-  email: {
-    type: String,
-    unique: true,
-    required: true,
+let userSchema = new Schema(
+  {
+    email: {
+      type: String,
+      unique: true,
+    },
+    role: {
+      type: String,
+    },
+    name: {
+      type: String,
+    },
+    storeId: {
+      type: String,
+    },
+    hash: String,
+    salt: String,
   },
-  role: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  hash: String,
-  salt: String,
-});
+  {
+    timestamps: true,
+  }
+);
 
 userSchema.methods.setPassword = function (password) {
   this.salt = crypto.randomBytes(16).toString("hex");

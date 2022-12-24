@@ -38,11 +38,11 @@ body {
   font-family: "Times New Roman", Times, serif !important;
 }
 
-.mat-toolbar.mat-primary {
-  background: var(--background-primary-color);
-  color: var(--highlighted-font-color);
-  font-family: "Times New Roman", Times, serif !important;
-}
+// .mat-toolbar.mat-primary {
+//   background: var(--background-primary-color);
+//   color: var(--highlighted-font-color);
+//   font-family: "Times New Roman", Times, serif !important;
+// }
 
 .display-block {
   display: block;
@@ -68,7 +68,6 @@ button.menu-button {
 .sidenav-container {
   height: 100%;
 }
-
 
 .sidenav {
   width: 230px;
@@ -122,7 +121,7 @@ button.menu-button {
 
 ::ng-deep div.mat-menu-panel {
   min-width: 112px;
-    /** set width to 500px */
+  /** set width to 500px */
   max-width: 500px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -205,6 +204,10 @@ hr {
   text-align: center;
 }
 
+.p-2 {
+  padding: 10px;
+}
+
 /* Large devices (desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .mat-sidenav {
@@ -225,7 +228,7 @@ hr {
 
 @media only screen and (min-width: 1400px) {
   .mat-sidenav {
-    width: 400px;
+    width: 333px;
   }
 
   /*1rem = 16px*/
@@ -233,10 +236,8 @@ hr {
 
 @media only screen and (min-width: 1600px) {
   .mat-sidenav {
-    width: 500px;
+    width: 333px;
   }
 
   /*1rem = 16px*/
 }
-
-

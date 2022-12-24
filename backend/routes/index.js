@@ -7,14 +7,22 @@ var auth = jwt({
   algorithms: ["HS256"],
 });
 
-var ctrlProfile = require("../controllers/profile");
-var ctrlAuth = require("../controllers/authentication");
+const ctrlUser = require("../controllers/users");
+const ctrlAuth = require("../controllers/authentication");
+const profile = require("../controllers/profile");
 
-// profile
-router.get("/profile", auth, ctrlProfile.profileRead);
+// user
+router.get("/user", auth, ctrlUser.userRead);
 
 // authentication
 router.post("/register", ctrlAuth.register);
 router.post("/login", ctrlAuth.login);
+
+// profile
+router.post("/profile/create", auth, profile.createProfile);
+router.get("/profile", auth, profile.getAllProfile);
+router.get("/profile/read/:id", auth, profile.getProfile);
+router.put("/profile/update/:id", auth, profile.updateProfile);
+router.delete("/profile/delete/:id", auth, profile.deleteProfile);
 
 module.exports = router;

@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit {
       this.credentials = this.form.value;
       this.auth.register(this.credentials).subscribe(
         (resp) => {
-          console.log(resp);
           this.router.navigate(["/admin"]);
         },
         (err) => {
