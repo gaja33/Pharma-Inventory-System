@@ -65,7 +65,11 @@ module.exports.updateProfile = function (req, res) {
         console.log(error);
         return next(error);
       } else {
-        res.json(data);
+        res.json({
+          messagecode: 200,
+          message: "Data updated successfully",
+          data: data,
+        });
         console.log("Data updated successfully");
       }
     }
