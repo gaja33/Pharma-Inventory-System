@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
+import { ProfileService } from "src/app/services/profile/profile.service";
 import { AddProfileComponent } from "../profile/add-profile/add-profile.component";
 
 @Component({
@@ -9,7 +10,12 @@ import { AddProfileComponent } from "../profile/add-profile/add-profile.componen
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-  constructor(private auth: AuthenticationService, public dialog: MatDialog) {}
+  storeDetails: any;
+  constructor(
+    private auth: AuthenticationService,
+    public dialog: MatDialog,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
     if (
@@ -19,6 +25,14 @@ export class HomeComponent implements OnInit {
       this.openDialog();
       return;
     }
+    this.profileService
+      .getProfile(sessionStorage.getItem("storeId"))
+      .subscribe((resp) => {
+        if (resp) {
+          this.storeDetails = resp;
+        }
+      });
+    console.log(this.storeDetails);
   }
 
   openDialog() {

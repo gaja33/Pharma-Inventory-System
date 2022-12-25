@@ -208,6 +208,9 @@ hr {
   padding: 10px;
 }
 
+::ng-deep.mat-card-header-text {
+  margin: 0 !important;
+}
 /* Large devices (desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .mat-sidenav {
