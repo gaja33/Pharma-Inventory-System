@@ -7,6 +7,7 @@ var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 // [SH] Require Passport
 var passport = require("passport");
+const createError = require("http-errors");
 
 // [SH] Bring in the data model
 // require("./api/models/db");

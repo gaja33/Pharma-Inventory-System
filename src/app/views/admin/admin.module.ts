@@ -15,9 +15,14 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
 import { MatDividerModule } from "@angular/material/divider";
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AddProfileComponent } from "./profile/add-profile/add-profile.component";
+import { MedicineTypesComponent } from "./medicine-types/medicine-types.component";
+import { MedicineTypesAddEditComponent } from './medicine-types/medicine-types-add-edit/medicine-types-add-edit.component';
 
 const matModules = [
   MatCardModule,
@@ -27,6 +32,9 @@ const matModules = [
   MatFormFieldModule,
   MatSelectModule,
   MatDividerModule,
+  MatTableModule,
+  MatIconModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({
@@ -35,6 +43,8 @@ const matModules = [
     ProfileComponent,
     AboutComponent,
     AddProfileComponent,
+    MedicineTypesComponent,
+    MedicineTypesAddEditComponent,
   ],
   imports: [
     CommonModule,

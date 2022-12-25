@@ -10,6 +10,7 @@ var auth = jwt({
 const ctrlUser = require("../controllers/users");
 const ctrlAuth = require("../controllers/authentication");
 const profile = require("../controllers/profile");
+const medicineTypes = require("../controllers/medicineTypes");
 
 // user
 router.get("/user", auth, ctrlUser.userRead);
@@ -24,5 +25,20 @@ router.get("/profile", auth, profile.getAllProfile);
 router.get("/profile/read/:id", auth, profile.getProfile);
 router.put("/profile/update/:id", auth, profile.updateProfile);
 router.delete("/profile/delete/:id", auth, profile.deleteProfile);
+
+//Medicine Types
+router.post("/medicineTypes/create", auth, medicineTypes.createMedicineTypes);
+router.get("/medicineTypes", auth, medicineTypes.getAllMedicineTypes);
+router.get("/medicineTypes/read/:id", auth, medicineTypes.getMedicineTypes);
+router.put(
+  "/medicineTypes/update/:id",
+  auth,
+  medicineTypes.updateMedicineTypes
+);
+router.delete(
+  "/medicineTypes/delete/:id",
+  auth,
+  medicineTypes.deleteMedicineTypes
+);
 
 module.exports = router;

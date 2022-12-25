@@ -1,13 +1,14 @@
-import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { environment } from "src/environments/environment";
 import { catchError, map } from "rxjs/operators";
+import { MedicineTypes } from "src/app/models/medicine-types/medicine-types.model";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
-export class ProfileService {
+export class MedicineTypesService {
   private token: string;
   baseUrl: string = environment.baseUrl;
   headers: { Authorization: string };
@@ -23,15 +24,24 @@ export class ProfileService {
     return this.token;
   }
 
-  createProfile(body): Observable<any> {
-    return this.http.post(`${this.baseUrl}/profile/create`, body, {
+  // Create
+  createMedicineTypes(body): Observable<any> {
+    let url = `${this.baseUrl}/medicineTypes/create`;
+    return this.http
+      .post(url, body, { headers: this.headers })
+      .pipe(catchError(this.errorMgmt));
+  }
+
+  // Get all Categorys
+  getAllMedicineTypes(): Observable<MedicineTypes[]> {
+    return this.http.get<MedicineTypes[]>(`${this.baseUrl}/medicineTypes`, {
       headers: this.headers,
     });
   }
 
-  // Get Profile
-  getProfile(id): Observable<any> {
-    let url = `${this.baseUrl}/profile/read/${id}`;
+  // Get MedicineTypes
+  getMedicineTypes(id): Observable<any> {
+    let url = `${this.baseUrl}/medicineTypes/read/${id}`;
     return this.http.get(url, { headers: this.headers }).pipe(
       map((res: Response) => {
         return res || {};
@@ -40,10 +50,19 @@ export class ProfileService {
     );
   }
 
-  updateProfile(id, body): Observable<any> {
-    let url = `${this.baseUrl}/profile/update/${id}`;
+  // Update MedicineTypes
+  updateMedicineTypes(id, data): Observable<any> {
+    let url = `${this.baseUrl}/medicineTypes/update/${id}`;
     return this.http
-      .put(url, body, { headers: this.headers })
+      .put(url, data, { headers: this.headers })
+      .pipe(catchError(this.errorMgmt));
+  }
+
+  // Delete MedicineTypes
+  deleteMedicineTypes(id): Observable<any> {
+    let url = `${this.baseUrl}/medicineTypes/delete/${id}`;
+    return this.http
+      .delete(url, { headers: this.headers })
       .pipe(catchError(this.errorMgmt));
   }
 

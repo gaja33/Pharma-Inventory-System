@@ -36,7 +36,9 @@ export class HomeComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddProfileComponent);
+    const dialogRef = this.dialog.open(AddProfileComponent, {
+      disableClose: true,
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);

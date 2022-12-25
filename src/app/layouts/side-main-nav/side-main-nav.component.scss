@@ -211,6 +211,11 @@ hr {
 ::ng-deep.mat-card-header-text {
   margin: 0 !important;
 }
+
+::ng-deep.mat-card {
+  height: auto;
+  min-height: 100%;
+}
 /* Large devices (desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .mat-sidenav {
