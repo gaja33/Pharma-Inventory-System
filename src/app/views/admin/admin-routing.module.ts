@@ -4,6 +4,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { MedicineTypesComponent } from "./medicine-types/medicine-types.component";
+import { StocksComponent } from "./stocks/stocks.component";
+import { StocksAddEditComponent } from "./stocks/stocks-add-edit/stocks-add-edit.component";
 
 const routes: Routes = [
   {
@@ -24,6 +26,21 @@ const routes: Routes = [
   {
     path: "types",
     component: MedicineTypesComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "stocks",
+    component: StocksComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "stocks/add",
+    component: StocksAddEditComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "stocks/edit/:id",
+    component: StocksAddEditComponent,
     pathMatch: "full",
   },
 ];

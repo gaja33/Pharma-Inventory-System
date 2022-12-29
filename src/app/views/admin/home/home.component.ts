@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
           this.storeDetails = resp;
         }
       });
-    console.log(this.storeDetails);
   }
 
   openDialog() {

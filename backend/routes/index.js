@@ -11,6 +11,7 @@ const ctrlUser = require("../controllers/users");
 const ctrlAuth = require("../controllers/authentication");
 const profile = require("../controllers/profile");
 const medicineTypes = require("../controllers/medicineTypes");
+const stocks = require("../controllers/stocks");
 
 // user
 router.get("/user", auth, ctrlUser.userRead);
@@ -40,5 +41,12 @@ router.delete(
   auth,
   medicineTypes.deleteMedicineTypes
 );
+
+// Stocks
+router.post("/stocks/create", auth, stocks.createStocks);
+router.get("/stocks", auth, stocks.getAllStocks);
+router.get("/stocks/read/:id", auth, stocks.getStock);
+router.put("/stocks/update/:id", auth, stocks.updateStocks);
+router.delete("/stocks/delete/:id", auth, stocks.deleteStocks);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { ProfileService } from "src/app/services/profile/profile.service";
 
 @Component({
@@ -23,7 +24,8 @@ export class AddProfileComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -33,6 +35,7 @@ export class AddProfileComponent implements OnInit {
     this.profileService.createProfile(this.form.value).subscribe((resp) => {
       if (resp._id) {
         sessionStorage.setItem("storeId", resp._id);
+        this.router.navigateByUrl("/admin/home");
       }
     });
     this.dialog.closeAll();

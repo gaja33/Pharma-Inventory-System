@@ -41,6 +41,7 @@ export class SideMainNavComponent implements OnInit, OnDestroy {
     this.auth.profile().subscribe((resp) => {
       this.details = resp;
       sessionStorage.setItem("storeId", resp.storeId);
+      //this.router.navigateByUrl("/admin");
     });
   }
 

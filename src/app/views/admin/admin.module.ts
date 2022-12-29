@@ -23,6 +23,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { AddProfileComponent } from "./profile/add-profile/add-profile.component";
 import { MedicineTypesComponent } from "./medicine-types/medicine-types.component";
 import { MedicineTypesAddEditComponent } from './medicine-types/medicine-types-add-edit/medicine-types-add-edit.component';
+import { StocksComponent } from './stocks/stocks.component';
+import { StocksAddEditComponent } from './stocks/stocks-add-edit/stocks-add-edit.component';
+import { DealerInfoComponent } from './stocks/dealer-info/dealer-info.component';
+import { GstInfoComponent } from './stocks/gst-info/gst-info.component';
 
 const matModules = [
   MatCardModule,
@@ -45,6 +49,10 @@ const matModules = [
     AddProfileComponent,
     MedicineTypesComponent,
     MedicineTypesAddEditComponent,
+    StocksComponent,
+    StocksAddEditComponent,
+    DealerInfoComponent,
+    GstInfoComponent,
   ],
   imports: [
     CommonModule,

@@ -8,6 +8,12 @@ let MedicineTypes = new Schema(
       type: String,
       unique: true,
     },
+    userId: {
+      type: String,
+    },
+    storeId: {
+      type: String,
+    },
   },
   {
     collection: "medicineTypes",

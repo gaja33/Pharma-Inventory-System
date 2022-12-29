@@ -3,7 +3,12 @@ let MedicineTypes = require("../models/medicineTypes");
 
 // Add MedicineTypes
 module.exports.createMedicineTypes = function (req, res, next) {
-  MedicineTypes.create(req.body, (error, data) => {
+  console.log(req.headers);
+  let body = req.body;
+  body.userId = req.auth._id;
+  body.storeId = req.headers.storeid;
+
+  MedicineTypes.create(body, (error, data) => {
     if (error) {
       //duplicate key
       if (error && error.code === 11000) {

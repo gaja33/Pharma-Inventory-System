@@ -11,4 +11,9 @@ export let menu: NavItem[] = [
     iconName: "info",
     route: "types",
   },
+  {
+    displayName: "Stocks",
+    iconName: "info",
+    route: "stocks",
+  },
 ];
