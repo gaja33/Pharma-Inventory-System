@@ -91,27 +91,44 @@ module.exports.getStock = function (req, res, next) {
 // Update Stocks
 module.exports.updateStocks = function (req, res, next) {
   let body = req.body;
-  body.totalQty = req.body.itemsInPkgOrStrip * req.body.qty + req.body.looseQty;
-  body.looseQty = req.body.looseQty;
-  body.userId = req.auth._id;
-  body.storeId = req.headers.storeid;
 
-  Stocks.findByIdAndUpdate(
-    req.params.id,
+  console.log(body);
+
+  Stocks.findOne(
     {
-      $set: body,
+      batch: req.body.batch,
     },
     (error, data) => {
-      if (error) {
-        console.log(error);
-        return next(error);
-      } else {
-        res.json({
-          messagecode: 200,
-          message: "Data updated successfully",
-          data: data,
-        });
-        console.log("Data updated successfully");
+      console.log("data", data);
+      if (data) {
+        if (data.batch === req.body.batch) {
+          body.pricePerItem =
+            req.body.pricePerPkgOrStrip / req.body.itemsInPkgOrStrip;
+          body.totalQty =
+            data.totalQty +
+            req.body.itemsInPkgOrStrip * req.body.qty +
+            req.body.looseQty;
+          body.looseQty = data.looseQty + req.body.looseQty;
+          Stocks.findByIdAndUpdate(
+            req.params.id,
+            {
+              $set: body,
+            },
+            (error, data) => {
+              if (error) {
+                console.log(error);
+                return next(error);
+              } else {
+                res.json({
+                  messagecode: 200,
+                  message: "Data updated successfully",
+                  data: data,
+                });
+                console.log("Data updated successfully");
+              }
+            }
+          );
+        }
       }
     }
   );
