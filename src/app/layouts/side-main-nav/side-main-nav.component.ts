@@ -9,6 +9,7 @@ import {
   AuthenticationService,
   UserDetails,
 } from "src/app/services/authentication/authentication.service";
+import { ProfileService } from "src/app/services/profile/profile.service";
 
 @Component({
   selector: "app-side-main-nav",
@@ -24,7 +25,8 @@ export class SideMainNavComponent implements OnInit, OnDestroy {
   constructor(
     private media: MediaObserver,
     private router: Router,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private profileService: ProfileService
   ) {
     this.mediaWatcher = this.media
       .asObservable()
@@ -40,8 +42,17 @@ export class SideMainNavComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.auth.profile().subscribe((resp) => {
       this.details = resp;
+      console.log("resp.storeId", resp.storeId);
       sessionStorage.setItem("storeId", resp.storeId);
       //this.router.navigateByUrl("/admin");
+
+      this.profileService
+        .getProfile(sessionStorage.getItem("storeId"))
+        .subscribe((resp) => {
+          if (resp) {
+            sessionStorage.setItem("storeDetails", JSON.stringify(resp));
+          }
+        });
     });
   }
 

@@ -6,6 +6,8 @@ import { ProfileComponent } from "./profile/profile.component";
 import { MedicineTypesComponent } from "./medicine-types/medicine-types.component";
 import { StocksComponent } from "./stocks/stocks.component";
 import { StocksAddEditComponent } from "./stocks/stocks-add-edit/stocks-add-edit.component";
+import { BillsComponent } from "./bills/bills.component";
+import { NewBillComponent } from "./bills/new-bill/new-bill.component";
 
 const routes: Routes = [
   {
@@ -41,6 +43,21 @@ const routes: Routes = [
   {
     path: "stocks/edit/:id",
     component: StocksAddEditComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "bills",
+    component: BillsComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "bills/add",
+    component: NewBillComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "bills/edit/:id",
+    component: NewBillComponent,
     pathMatch: "full",
   },
 ];

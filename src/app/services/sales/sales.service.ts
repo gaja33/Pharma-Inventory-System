@@ -2,13 +2,13 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
-import { Stocks } from "src/app/models/stocks/stocks.model";
+import { Sales } from "src/app/models/sales/sales.model";
 import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
-export class StocksService {
+export class SalesService {
   private token: string;
   baseUrl: string = environment.baseUrl;
   headers: { Authorization: string; storeId: string };
@@ -28,23 +28,23 @@ export class StocksService {
   }
 
   // Create
-  createStocks(body): Observable<any> {
-    let url = `${this.baseUrl}/stocks/create`;
+  createSales(body): Observable<any> {
+    let url = `${this.baseUrl}/sales/create`;
     return this.http
       .post(url, body, { headers: this.headers })
       .pipe(catchError(this.errorMgmt));
   }
 
-  // Get all Stocks
-  getAllStocks(): Observable<Stocks[]> {
-    return this.http.get<Stocks[]>(`${this.baseUrl}/stocks`, {
+  // Get all Sales
+  getAllSales(): Observable<Sales[]> {
+    return this.http.get<Sales[]>(`${this.baseUrl}/sales`, {
       headers: this.headers,
     });
   }
 
-  // Get Stocks
-  getStocks(id): Observable<any> {
-    let url = `${this.baseUrl}/stocks/read/${id}`;
+  // Get Sales
+  getSales(id): Observable<any> {
+    let url = `${this.baseUrl}/sales/read/${id}`;
     return this.http.get(url, { headers: this.headers }).pipe(
       map((res: Response) => {
         return res || {};
@@ -53,27 +53,19 @@ export class StocksService {
     );
   }
 
-  // Update Stocks
-  updateStocks(id, data): Observable<any> {
-    let url = `${this.baseUrl}/stocks/update/${id}`;
+  // Update Sales
+  updateSales(id, data): Observable<any> {
+    let url = `${this.baseUrl}/sales/update/${id}`;
     return this.http
       .put(url, data, { headers: this.headers })
       .pipe(catchError(this.errorMgmt));
   }
 
-  // Delete Stocks
-  deleteStocks(id): Observable<any> {
-    let url = `${this.baseUrl}/stocks/delete/${id}`;
+  // Delete Sales
+  deleteSales(id): Observable<any> {
+    let url = `${this.baseUrl}/sales/delete/${id}`;
     return this.http
       .delete(url, { headers: this.headers })
-      .pipe(catchError(this.errorMgmt));
-  }
-
-  // Search Stocks
-  searchStocks(term): Observable<any> {
-    let url = `${this.baseUrl}/stocks/search?term=` + term;
-    return this.http
-      .get(url, { headers: this.headers })
       .pipe(catchError(this.errorMgmt));
   }
 

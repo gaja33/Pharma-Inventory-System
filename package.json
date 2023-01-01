@@ -24,6 +24,7 @@
     "@angular/router": "~11.2.7",
     "bootstrap": "^5.2.3",
     "concurrently": "^6.2.0",
+    "moment": "^2.29.4",
     "pdfmake": "^0.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

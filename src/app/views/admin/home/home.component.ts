@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(sessionStorage.getItem("storeId"));
     if (
       sessionStorage.getItem("storeId") === "null" ||
       sessionStorage.getItem("storeId") === null
@@ -25,13 +26,7 @@ export class HomeComponent implements OnInit {
       this.openDialog();
       return;
     }
-    this.profileService
-      .getProfile(sessionStorage.getItem("storeId"))
-      .subscribe((resp) => {
-        if (resp) {
-          this.storeDetails = resp;
-        }
-      });
+    this.storeDetails = JSON.parse(sessionStorage.getItem("storeDetails"));
   }
 
   openDialog() {

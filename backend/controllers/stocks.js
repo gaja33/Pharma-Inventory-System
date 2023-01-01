@@ -4,6 +4,7 @@ let Stocks = require("../models/stocks");
 // Add Stocks
 module.exports.createStocks = function (req, res, next) {
   let body = req.body;
+  body.pricePerItem = req.body.pricePerPkgOrStrip / req.body.itemsInPkgOrStrip;
   body.totalQty = req.body.itemsInPkgOrStrip * req.body.qty + req.body.looseQty;
   body.looseQty = req.body.looseQty;
   body.userId = req.auth._id;
@@ -127,4 +128,20 @@ module.exports.deleteStocks = function (req, res, next) {
       });
     }
   });
+};
+
+//Search Stocks
+module.exports.searchStocks = (req, res, next) => {
+  var regex = new RegExp(req.query["term"], "i");
+  if (req.query["term"] == "") {
+    res.status(200).json([]);
+  } else {
+    Stocks.find({ name: regex }, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.status(200).json(data);
+      }
+    });
+  }
 };

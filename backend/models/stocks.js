@@ -28,6 +28,9 @@ let Stocks = new Schema(
     itemsInPkgOrStrip: {
       type: Number,
     },
+    pricePerItem: {
+      type: Number,
+    },
     qty: {
       type: Number,
     },

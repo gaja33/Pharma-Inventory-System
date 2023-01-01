@@ -29,7 +29,7 @@ let Profile = new Schema(
       type: String,
     },
     previousBillCount: {
-      type: String,
+      type: Number,
     },
   },
   {

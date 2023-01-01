@@ -1,10 +1,10 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title *ngIf="isAddMode">Add Stock</mat-card-title>
-      <mat-card-title *ngIf="!isAddMode">Update Stock</mat-card-title>
-    </mat-card-header>
-    <mat-divider></mat-divider>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="isAddMode">Add Stock</mat-card-title>
+    <mat-card-title *ngIf="!isAddMode">Update Stock</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-card-content class="pt-3">
       <div class="row no-gutters">
         <div class="col-4">
@@ -195,5 +195,5 @@
         Cancel
       </button>
     </mat-card-actions>
-  </mat-card>
-</form>
+  </form>
+</mat-card>

@@ -7,6 +7,11 @@ export let menu: NavItem[] = [
     route: "home",
   },
   {
+    displayName: "Bills",
+    iconName: "info",
+    route: "bills",
+  },
+  {
     displayName: "Medicine Types",
     iconName: "info",
     route: "types",

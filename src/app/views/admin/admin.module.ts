@@ -18,15 +18,22 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatTableModule } from "@angular/material/table";
 import { MatIconModule } from "@angular/material/icon";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { FormsModule } from "@angular/forms";
+import { MatRadioModule } from "@angular/material/radio";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AddProfileComponent } from "./profile/add-profile/add-profile.component";
 import { MedicineTypesComponent } from "./medicine-types/medicine-types.component";
-import { MedicineTypesAddEditComponent } from './medicine-types/medicine-types-add-edit/medicine-types-add-edit.component';
-import { StocksComponent } from './stocks/stocks.component';
-import { StocksAddEditComponent } from './stocks/stocks-add-edit/stocks-add-edit.component';
-import { DealerInfoComponent } from './stocks/dealer-info/dealer-info.component';
-import { GstInfoComponent } from './stocks/gst-info/gst-info.component';
+import { MedicineTypesAddEditComponent } from "./medicine-types/medicine-types-add-edit/medicine-types-add-edit.component";
+import { StocksComponent } from "./stocks/stocks.component";
+import { StocksAddEditComponent } from "./stocks/stocks-add-edit/stocks-add-edit.component";
+import { DealerInfoComponent } from "./stocks/dealer-info/dealer-info.component";
+import { GstInfoComponent } from "./stocks/gst-info/gst-info.component";
+import { BillsComponent } from "./bills/bills.component";
+import { NewBillComponent } from "./bills/new-bill/new-bill.component";
+import { AddItemComponent } from "./bills/add-item/add-item.component";
+import { PaymentInfoComponent } from "./bills/payment-info/payment-info.component";
 
 const matModules = [
   MatCardModule,
@@ -39,6 +46,9 @@ const matModules = [
   MatTableModule,
   MatIconModule,
   MatPaginatorModule,
+  MatAutocompleteModule,
+  FormsModule,
+  MatRadioModule,
 ];
 
 @NgModule({
@@ -53,6 +63,10 @@ const matModules = [
     StocksAddEditComponent,
     DealerInfoComponent,
     GstInfoComponent,
+    BillsComponent,
+    NewBillComponent,
+    AddItemComponent,
+    PaymentInfoComponent,
   ],
   imports: [
     CommonModule,
