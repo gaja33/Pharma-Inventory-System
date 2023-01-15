@@ -8,6 +8,7 @@ import { StocksComponent } from "./stocks/stocks.component";
 import { StocksAddEditComponent } from "./stocks/stocks-add-edit/stocks-add-edit.component";
 import { BillsComponent } from "./bills/bills.component";
 import { NewBillComponent } from "./bills/new-bill/new-bill.component";
+import { DoctorsComponent } from "./doctors/doctors.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: "types",
     component: MedicineTypesComponent,
+    pathMatch: "full",
+  },
+  {
+    path: "doctors",
+    component: DoctorsComponent,
     pathMatch: "full",
   },
   {

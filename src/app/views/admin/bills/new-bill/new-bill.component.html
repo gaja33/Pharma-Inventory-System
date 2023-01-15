@@ -42,7 +42,7 @@
         </div>
         <div class="col-6" formGroupName="doctorInfo">
           <p>
-            <mat-form-field>
+            <!-- <mat-form-field>
               <mat-label>Doctor Name</mat-label>
               <input
                 type="text"
@@ -50,6 +50,19 @@
                 placeholder="Enter Doctor Name"
                 formControlName="name"
               />
+            </mat-form-field> -->
+            <mat-form-field>
+              <mat-label>Select Doctor</mat-label>
+              <mat-select
+                formControlName="name"
+                (selectionChange)="patchDoctor($event)"
+              >
+                <mat-option
+                  [value]="doctor.name"
+                  *ngFor="let doctor of doctors"
+                  >{{ doctor.name }}</mat-option
+                >
+              </mat-select>
             </mat-form-field>
           </p>
           <p>

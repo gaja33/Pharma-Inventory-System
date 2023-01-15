@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "dev": "ng serve -o --proxy-config proxy.conf.json",
+    "backend": "cd backend && nodemon server",
+    "database": "cd backend && mongod",
+    "start": "concurrently \"npm run database\" \"npm run backend\" \"npm run dev\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

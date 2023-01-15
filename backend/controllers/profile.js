@@ -3,7 +3,7 @@ let Profile = require("../models/profile");
 let User = require("../models/users");
 
 // Add Profile
-module.exports.createProfile = function (req, res) {
+module.exports.createProfile = function (req, res, next) {
   Profile.create(req.body, (error, profileData) => {
     if (error) {
       return next(error);
@@ -32,7 +32,7 @@ module.exports.createProfile = function (req, res) {
 };
 
 // Get All Profile
-module.exports.getAllProfile = function (req, res) {
+module.exports.getAllProfile = function (req, res, next) {
   Profile.find((error, data) => {
     if (error) {
       return next(error);
@@ -43,7 +43,7 @@ module.exports.getAllProfile = function (req, res) {
 };
 
 // Get single Profile
-module.exports.getProfile = function (req, res) {
+module.exports.getProfile = function (req, res, next) {
   Profile.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error);
@@ -54,7 +54,7 @@ module.exports.getProfile = function (req, res) {
 };
 
 // Update Profile
-module.exports.updateProfile = function (req, res) {
+module.exports.updateProfile = function (req, res, next) {
   Profile.findByIdAndUpdate(
     req.params.id,
     {
@@ -77,7 +77,7 @@ module.exports.updateProfile = function (req, res) {
 };
 
 // Delete Profile
-module.exports.deleteProfile = function (req, res) {
+module.exports.deleteProfile = function (req, res, next) {
   Profile.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       return next(error);

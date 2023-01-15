@@ -34,6 +34,8 @@ import { BillsComponent } from "./bills/bills.component";
 import { NewBillComponent } from "./bills/new-bill/new-bill.component";
 import { AddItemComponent } from "./bills/add-item/add-item.component";
 import { PaymentInfoComponent } from "./bills/payment-info/payment-info.component";
+import { DoctorsComponent } from './doctors/doctors.component';
+import { DoctorsAddEditComponent } from './doctors/doctors-add-edit/doctors-add-edit.component';
 
 const matModules = [
   MatCardModule,
@@ -67,6 +69,8 @@ const matModules = [
     NewBillComponent,
     AddItemComponent,
     PaymentInfoComponent,
+    DoctorsComponent,
+    DoctorsAddEditComponent,
   ],
   imports: [
     CommonModule,

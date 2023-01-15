@@ -7,6 +7,8 @@ import * as moment from "moment";
 import { SalesService } from "src/app/services/sales/sales.service";
 import { PaymentInfoComponent } from "../payment-info/payment-info.component";
 import { ProfileService } from "src/app/services/profile/profile.service";
+import { DoctorsService } from "src/app/services/doctors/doctors.service";
+import { Doctors } from "src/app/models/doctors/doctors.model";
 
 @Component({
   selector: "app-new-bill",
@@ -26,6 +28,7 @@ export class NewBillComponent implements OnInit {
   totalDiscount: number = 0;
   totalAmount: number = 0;
   ProfileData: any;
+  doctors: Doctors[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +36,8 @@ export class NewBillComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private salesService: SalesService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private doctorsService: DoctorsService
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +89,23 @@ export class NewBillComponent implements OnInit {
         this.billId = x.billId;
       });
     }
+
+    this.getDoctors();
+  }
+
+  getDoctors() {
+    this.doctorsService.getAllDoctors().subscribe((resp: Doctors[]) => {
+      this.doctors = resp;
+    });
+  }
+
+  patchDoctor(value) {
+    console.log(value.value);
+    let number = this.doctors.find(
+      (item) => item.name === value.value
+    ).contactNumber;
+    console.log(number);
+    this.form.get("doctorInfo.contactNumber").setValue(number);
   }
 
   generateBillId(num, billPrefix) {

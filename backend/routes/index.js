@@ -13,6 +13,7 @@ const profile = require("../controllers/profile");
 const medicineTypes = require("../controllers/medicineTypes");
 const stocks = require("../controllers/stocks");
 const sales = require("../controllers/sales");
+const doctors = require("../controllers/doctors");
 
 // user
 router.get("/user", auth, ctrlUser.userRead);
@@ -42,6 +43,13 @@ router.delete(
   auth,
   medicineTypes.deleteMedicineTypes
 );
+
+//Doctors
+router.post("/doctors/create", auth, doctors.createDoctors);
+router.get("/doctors", auth, doctors.getAllDoctors);
+router.get("/doctors/read/:id", auth, doctors.getDoctors);
+router.put("/doctors/update/:id", auth, doctors.updateDoctors);
+router.delete("/doctors/delete/:id", auth, doctors.deleteDoctors);
 
 // Stocks
 router.post("/stocks/create", auth, stocks.createStocks);
