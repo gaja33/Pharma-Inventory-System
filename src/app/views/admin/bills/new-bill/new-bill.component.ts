@@ -146,12 +146,6 @@ export class NewBillComponent implements OnInit {
         console.log(this.form.value);
         if (this.isAddMode) {
           this.createSales();
-          this.ProfileData.previousBillCount = parseInt(
-            this.billId.split("_")[1]
-          );
-          this.profileService
-            .updateProfile(this.ProfileData._id, this.ProfileData)
-            .subscribe();
         } else {
           this.updateSales();
         }
@@ -247,7 +241,15 @@ export class NewBillComponent implements OnInit {
 
   createSales() {
     this.salesService.createSales(this.form.value).subscribe((response) => {
-      this.router.navigate(["/admin/bills"]);
+      if (response) {
+        this.ProfileData.previousBillCount = parseInt(
+          this.billId.split("_")[1]
+        );
+        this.profileService
+          .updateProfile(this.ProfileData._id, this.ProfileData)
+          .subscribe();
+        this.router.navigate(["/admin/bills"]);
+      }
     });
   }
 
@@ -255,7 +257,9 @@ export class NewBillComponent implements OnInit {
     this.salesService
       .updateSales(this.id, this.form.value)
       .subscribe((response) => {
-        this.router.navigate(["/admin/bills"]);
+        if (response) {
+          this.router.navigate(["/admin/bills"]);
+        }
       });
   }
 }
