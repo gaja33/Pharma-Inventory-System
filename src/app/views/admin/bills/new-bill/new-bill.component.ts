@@ -9,6 +9,7 @@ import { PaymentInfoComponent } from "../payment-info/payment-info.component";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { DoctorsService } from "src/app/services/doctors/doctors.service";
 import { Doctors } from "src/app/models/doctors/doctors.model";
+import { generatePDF } from "./helper";
 
 @Component({
   selector: "app-new-bill",
@@ -248,6 +249,7 @@ export class NewBillComponent implements OnInit {
         this.profileService
           .updateProfile(this.ProfileData._id, this.ProfileData)
           .subscribe();
+        generatePDF("open", this.form.value);
         this.router.navigate(["/admin/bills"]);
       }
     });
@@ -258,6 +260,7 @@ export class NewBillComponent implements OnInit {
       .updateSales(this.id, this.form.value)
       .subscribe((response) => {
         if (response) {
+          generatePDF("open", this.form.value);
           this.router.navigate(["/admin/bills"]);
         }
       });
