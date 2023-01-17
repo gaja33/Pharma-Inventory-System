@@ -4,6 +4,12 @@ const Schema = mongoose.Schema;
 // Define collection and schema
 let Stocks = new Schema(
   {
+    invoiceNo: {
+      type: String,
+    },
+    invoiceDate: {
+      type: String,
+    },
     name: {
       type: String,
     },

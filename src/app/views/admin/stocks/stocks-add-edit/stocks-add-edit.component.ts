@@ -35,6 +35,8 @@ export class StocksAddEditComponent implements OnInit {
     this.isAddMode = !this.id;
 
     this.form = this.formBuilder.group({
+      invoiceNo: ["", Validators.required],
+      invoiceDate: ["", Validators.required],
       name: ["", Validators.required],
       companyName: ["", Validators.required],
       type: ["", Validators.required],

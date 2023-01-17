@@ -7,6 +7,34 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-card-content class="pt-3">
       <div class="row no-gutters">
+        <div class="col-6">
+          <p>
+            <mat-form-field>
+              <mat-label>Invoice Number</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Invoice Number"
+                formControlName="invoiceNo"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-6">
+          <p>
+            <mat-form-field>
+              <mat-label>Invoice Date</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Invoice Date"
+                formControlName="invoiceDate"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
         <div class="col-4">
           <p>
             <mat-form-field>
