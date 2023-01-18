@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { ProfileService } from "src/app/services/profile/profile.service";
 import { AddProfileComponent } from "../profile/add-profile/add-profile.component";
@@ -14,11 +15,11 @@ export class HomeComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
     public dialog: MatDialog,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    console.log(localStorage.getItem("storeId"));
     if (
       localStorage.getItem("storeId") === "null" ||
       localStorage.getItem("storeId") === null
@@ -35,7 +36,17 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      this.profileService.getProfile(localStorage.getItem("storeId")).subscribe(
+        (resp) => {
+          if (resp) {
+            localStorage.setItem("storeDetails", JSON.stringify(resp));
+            this.storeDetails = JSON.parse(
+              localStorage.getItem("storeDetails")
+            );
+          }
+        },
+        (err) => {}
+      );
     });
   }
 }

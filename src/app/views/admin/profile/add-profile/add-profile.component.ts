@@ -35,9 +35,8 @@ export class AddProfileComponent implements OnInit {
     this.profileService.createProfile(this.form.value).subscribe((resp) => {
       if (resp._id) {
         localStorage.setItem("storeId", resp._id);
-        this.router.navigateByUrl("/admin/home");
+        this.dialog.closeAll();
       }
     });
-    this.dialog.closeAll();
   }
 }

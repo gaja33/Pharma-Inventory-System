@@ -5,11 +5,17 @@ const Schema = mongoose.Schema;
 let Doctors = new Schema(
   {
     name: {
-      type: String
+      type: String,
     },
     contactNumber: {
       type: Number,
-    }
+    },
+    userId: {
+      type: String,
+    },
+    storeId: {
+      type: String,
+    },
   },
   {
     collection: "doctors",
