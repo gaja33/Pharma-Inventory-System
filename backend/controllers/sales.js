@@ -4,7 +4,6 @@ let Stocks = require("../models/stocks");
 
 // Add Sales
 module.exports.createSales = function (req, res, next) {
-  console.log(req.headers);
   let body = req.body;
   body.userId = req.auth._id;
   body.storeId = req.headers.storeid;
@@ -22,7 +21,6 @@ module.exports.createSales = function (req, res, next) {
     } else {
       updateStocks(body.items);
       res.json(data);
-      console.log("Sales", data);
     }
   });
 };
@@ -51,25 +49,52 @@ module.exports.getSales = function (req, res, next) {
 
 // Update Sales
 module.exports.updateSales = function (req, res, next) {
-  Sales.findByIdAndUpdate(
-    req.params.id,
-    {
-      $set: req.body,
-    },
-    { new: true },
-    (error, data) => {
-      if (error) {
-        return next(error);
-      } else {
-        updateStocks(req.body.items);
+  Sales.findById(req.params.id, (error, salesData) => {
+    if (error) {
+      return next(error);
+    } else {
+      let arr = [];
+      salesData.items.forEach((item, index) => {
+        arr.push(index);
+        if (item.qty != req.body.items[index].qty) {
+          Sales.findByIdAndUpdate(
+            req.params.id,
+            {
+              $set: req.body,
+            },
+            { new: true },
+            (error, data) => {
+              if (error) {
+                return next(error);
+              } else {
+                updateStocks(req.body.items[index], item.qty);
+              }
+            }
+          );
+        } else {
+          Sales.findByIdAndUpdate(
+            req.params.id,
+            {
+              $set: req.body,
+            },
+            { new: true },
+            (error, data) => {
+              if (error) {
+                return next(error);
+              } else {
+              }
+            }
+          );
+        }
+      });
+      if (salesData.items.length == arr.length) {
         res.json({
           messagecode: 200,
           message: "Data updated successfully",
-          data: data,
         });
       }
     }
-  );
+  });
 };
 
 // Delete Sales
@@ -85,30 +110,52 @@ module.exports.deleteSales = function (req, res, next) {
   });
 };
 
-var updateStocks = (items) => {
-  items.forEach((item) => {
-    Stocks.findById(item.itemDetails._id, (error, stockDATA) => {
-      if (error) {
-        return next(error);
-      } else {
-        console.log("stockDATA", stockDATA);
-        Stocks.updateOne(
-          { batch: stockDATA.batch },
-          {
-            $set: {
-              totalQty: stockDATA.totalQty - item.qty,
-            },
-            $currentDate: { lastModified: true },
+var updateStocks = (item, prevCount) => {
+  // items.forEach((item) => {
+  //   Stocks.findById(item.itemDetails._id, (error, stockDATA) => {
+  //     if (error) {
+  //       return next(error);
+  //     } else {
+  //       console.log("stockDATA", stockDATA);
+  //       Stocks.updateOne(
+  //         { batch: stockDATA.batch },
+  //         {
+  //           $set: {
+  //             totalQty: stockDATA.totalQty - item.qty,
+  //           },
+  //           $currentDate: { lastModified: true },
+  //         },
+  //         (err, updated) => {
+  //           if (err) {
+  //             console.log(err);
+  //           } else {
+  //             console.log("updated", updated);
+  //           }
+  //         }
+  //       );
+  //     }
+  //   });
+  // });
+  Stocks.findById(item.itemDetails._id, (error, stockDATA) => {
+    if (error) {
+      return next(error);
+    } else {
+      Stocks.updateOne(
+        { batch: stockDATA.batch },
+        {
+          $set: {
+            totalQty: stockDATA.totalQty - (item.qty - prevCount),
           },
-          (err, updated) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log("updated", updated);
-            }
+          $currentDate: { lastModified: true },
+        },
+        (err, updated) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("updated", updated);
           }
-        );
-      }
-    });
+        }
+      );
+    }
   });
 };
