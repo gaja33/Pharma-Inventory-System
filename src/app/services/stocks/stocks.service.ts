@@ -16,7 +16,7 @@ export class StocksService {
   constructor(private http: HttpClient) {
     this.headers = {
       Authorization: `Bearer ${this.getToken()}`,
-      storeId: sessionStorage.getItem("storeId"),
+      storeId: localStorage.getItem("storeId"),
     };
   }
 

@@ -18,15 +18,15 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(sessionStorage.getItem("storeId"));
+    console.log(localStorage.getItem("storeId"));
     if (
-      sessionStorage.getItem("storeId") === "null" ||
-      sessionStorage.getItem("storeId") === null
+      localStorage.getItem("storeId") === "null" ||
+      localStorage.getItem("storeId") === null
     ) {
       this.openDialog();
       return;
     }
-    this.storeDetails = JSON.parse(sessionStorage.getItem("storeDetails"));
+    this.storeDetails = JSON.parse(localStorage.getItem("storeDetails"));
   }
 
   openDialog() {

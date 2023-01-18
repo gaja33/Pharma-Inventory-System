@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
     });
 
     this.profileService
-      .getProfile(sessionStorage.getItem("storeId"))
+      .getProfile(localStorage.getItem("storeId"))
       .subscribe((resp) => {
         console.log(resp);
         this.form.patchValue(resp);
@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
 
   updateProfile() {
     this.profileService
-      .updateProfile(sessionStorage.getItem("storeId"), this.form.value)
+      .updateProfile(localStorage.getItem("storeId"), this.form.value)
       .subscribe((response) => {
         console.log(response);
         if (response.messagecode === 200) {

@@ -43,14 +43,14 @@ export class SideMainNavComponent implements OnInit, OnDestroy {
     this.auth.profile().subscribe((resp) => {
       this.details = resp;
       console.log("resp.storeId", resp.storeId);
-      sessionStorage.setItem("storeId", resp.storeId);
+      localStorage.setItem("storeId", resp.storeId);
       //this.router.navigateByUrl("/admin");
 
       this.profileService
-        .getProfile(sessionStorage.getItem("storeId"))
+        .getProfile(localStorage.getItem("storeId"))
         .subscribe((resp) => {
           if (resp) {
-            sessionStorage.setItem("storeDetails", JSON.stringify(resp));
+            localStorage.setItem("storeDetails", JSON.stringify(resp));
           }
         });
     });

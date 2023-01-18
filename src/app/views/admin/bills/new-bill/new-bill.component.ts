@@ -67,7 +67,7 @@ export class NewBillComponent implements OnInit {
 
     if (this.isAddMode) {
       this.profileService
-        .getProfile(sessionStorage.getItem("storeId"))
+        .getProfile(localStorage.getItem("storeId"))
         .subscribe((resp) => {
           if (resp) {
             this.ProfileData = resp;
