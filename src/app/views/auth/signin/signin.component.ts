@@ -5,6 +5,7 @@ import {
   AuthenticationService,
   TokenPayload,
 } from "src/app/services/authentication/authentication.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-signin",
@@ -24,9 +25,19 @@ export class SigninComponent implements OnInit {
     password: "",
   };
 
-  constructor(private router: Router, private auth: AuthenticationService) {}
+  constructor(
+    private router: Router,
+    private auth: AuthenticationService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
 
   submit() {
     if (this.form.valid) {
@@ -35,10 +46,13 @@ export class SigninComponent implements OnInit {
       this.auth.login(this.credentials).subscribe(
         (resp) => {
           console.log(resp);
-          this.router.navigate(["/admin"]);
+          if (resp.token) {
+            this.router.navigate(["/admin"]);
+          }
         },
         (err) => {
-          console.error(err);
+          console.log(err);
+          this.openSnackBar(err.error.message, "Close");
         }
       );
     }

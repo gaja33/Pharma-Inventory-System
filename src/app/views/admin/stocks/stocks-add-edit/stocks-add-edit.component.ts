@@ -48,8 +48,8 @@ export class StocksAddEditComponent implements OnInit {
       qty: [null, Validators.required],
       looseQty: [0, Validators.required],
       shelfName: [""],
-      dealerInfo: [""],
-      gstHsnInfo: [""],
+      dealerInfo: ["", Validators.required],
+      gstHsnInfo: ["", Validators.required],
     });
 
     if (!this.isAddMode) {
