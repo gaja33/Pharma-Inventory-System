@@ -19,7 +19,7 @@ module.exports.createSales = function (req, res, next) {
       }
       return next(error);
     } else {
-      updateStocks(body.items);
+      createStocks(body.items);
       res.json(data);
     }
   });
@@ -107,6 +107,34 @@ module.exports.deleteSales = function (req, res, next) {
         msg: data,
       });
     }
+  });
+};
+
+var createStocks = (items) => {
+  items.forEach((item) => {
+    Stocks.findById(item.itemDetails._id, (error, stockDATA) => {
+      if (error) {
+        return next(error);
+      } else {
+        console.log("stockDATA", stockDATA);
+        Stocks.updateOne(
+          { batch: stockDATA.batch },
+          {
+            $set: {
+              totalQty: stockDATA.totalQty - item.qty,
+            },
+            $currentDate: { lastModified: true },
+          },
+          (err, updated) => {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("updated", updated);
+            }
+          }
+        );
+      }
+    });
   });
 };
 
