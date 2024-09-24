@@ -1,0 +1,197 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>New Bill</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card-content class="pt-3">
+      <!-- <input type="hidden" formControlName="items" /> -->
+      <div class="row no-gutters">
+        <div class="col-12">
+          <label>Bill Id: {{ billId }}</label
+          >&nbsp;
+          <label>Bill Date: {{ billDate }}</label>
+        </div>
+      </div>
+      <br />
+      <div class="row no-gutters">
+        <div class="col-6" formGroupName="patientInfo">
+          <p>
+            <mat-form-field>
+              <mat-label>Patient Name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Patient Name"
+                formControlName="name"
+                autofocus
+              />
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <mat-label>Contact Number</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Contact Number"
+                formControlName="contactNumber"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-6" formGroupName="doctorInfo">
+          <p>
+            <!-- <mat-form-field>
+              <mat-label>Doctor Name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Doctor Name"
+                formControlName="name"
+              />
+            </mat-form-field> -->
+            <mat-form-field>
+              <mat-label>Select Doctor</mat-label>
+              <mat-select
+                formControlName="name"
+                (selectionChange)="patchDoctor($event)"
+              >
+                <mat-option
+                  [value]="doctor.name"
+                  *ngFor="let doctor of doctors"
+                  >{{ doctor.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <mat-label>Contact Number</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Contact Number"
+                formControlName="contactNumber"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-12">
+          <button
+            type="button"
+            mat-raised-button
+            color="primary"
+            (click)="openAddItem()"
+          >
+            Add Item
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-12">
+          <div class="list-group list-group-flush">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Sl No.</th>
+                  <th>Medicine Name</th>
+                  <th>HSN Code</th>
+                  <th>Batch</th>
+                  <th>CSGT</th>
+                  <th>SGST</th>
+                  <th>Discount</th>
+                  <th>Qty</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of Items; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ item.itemDetails.name }}</td>
+                  <td>{{ item.itemDetails.gstHsnInfo.hsnCode }}</td>
+                  <td>{{ item.itemDetails.batch }}</td>
+                  <td>
+                    {{ calculateGST(item.itemDetails.gstHsnInfo.cgst, item) }}
+                    ({{ item.itemDetails.gstHsnInfo.cgst }}%)
+                  </td>
+                  <td>
+                    {{
+                      calculateGST(item.itemDetails.gstHsnInfo.sgst, item)
+                    }}({{ item.itemDetails.gstHsnInfo.sgst }}%)
+                  </td>
+                  <td>
+                    {{
+                      calculateDiscount(
+                        item.discount,
+                        item.qty * item.itemDetails.pricePerItem
+                      )
+                    }}
+                    ({{ item.discount }}%)
+                  </td>
+                  <td>
+                    <mat-form-field style="width: 100px">
+                      <input
+                        type="number"
+                        matInput
+                        [(ngModel)]="item.qty"
+                        [ngModelOptions]="{ standalone: true }"
+                        (change)="updateTax(item)"
+                      />
+                    </mat-form-field>
+                  </td>
+                  <td>{{ calculateAmount(item) }}</td>
+                  <td
+                    style="
+                      vertical-align: middle;
+                      text-align: center;
+                      width: 50px;
+                    "
+                  >
+                    <mat-icon
+                      style="color: red; cursor: pointer"
+                      (click)="deleteItem(i)"
+                      >delete</mat-icon
+                    >
+                  </td>
+                </tr>
+              </tbody>
+              <caption class="text-right">
+                Tax:
+                {{
+                  totalTax
+                }}
+              </caption>
+              <caption class="text-right">
+                Discount:
+                {{
+                  totalDiscount
+                }}
+              </caption>
+              <caption class="text-right">
+                Total:
+                {{
+                  totalAmount
+                }}
+              </caption>
+            </table>
+
+            <div class="list-group-item"></div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="start" class="m-0">
+      <button type="submit" mat-raised-button color="primary">
+        Generate Bill
+      </button>
+      <button type="button" mat-raised-button routerLink="/admin/bills">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -1,0 +1,227 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="isAddMode">Add Stock</mat-card-title>
+    <mat-card-title *ngIf="!isAddMode">Update Stock</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-card-content class="pt-3">
+      <div class="row no-gutters">
+        <div class="col-6">
+          <p>
+            <mat-form-field>
+              <mat-label>Invoice Number</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Invoice Number"
+                formControlName="invoiceNo"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-6">
+          <p>
+            <mat-form-field>
+              <mat-label>Invoice Date</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Invoice Date"
+                formControlName="invoiceDate"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Medicine Name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Medicine Name"
+                formControlName="name"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Company Name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Company Name"
+                formControlName="companyName"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Select Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option
+                  [value]="type.typeName"
+                  *ngFor="let type of types"
+                  >{{ type.typeName }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Batch</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Batch"
+                formControlName="batch"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Mfg Date</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Mfg Date (Ex: 10/22)"
+                formControlName="mfgDate"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Exp Date</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Exp Date (Ex: 10/22)"
+                formControlName="expDate"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Price Per Packaging/Strip</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Price Per Packaging/Strip"
+                formControlName="pricePerPkgOrStrip"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Items In Per Packaging/Strip</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Items In Per Packaging/Strip"
+                formControlName="itemsInPkgOrStrip"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Qunatity</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="Enter Quantity"
+                formControlName="qty"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Loose Quantity</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="Enter Loose Qty"
+                formControlName="looseQty"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Shelf Name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Shelf Name"
+                formControlName="shelfName"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>Dealer Info</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter Dealer Info"
+                formControlName="dealerInfo"
+                (click)="openDealerInfoDialog()"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-4">
+          <p>
+            <mat-form-field>
+              <mat-label>GST Info</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Enter GST And HSN Info"
+                formControlName="gstHsnInfo"
+                (click)="openGSTInfoDialog()"
+              />
+            </mat-form-field>
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button type="submit" mat-raised-button color="primary">Submit</button>
+      <button type="button" mat-raised-button routerLink="/admin/stocks">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>
